@@ -1,0 +1,15 @@
+package eu.b24u.cucumber;
+
+import org.junit.runner.RunWith;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+		plugin = {"pretty","json:target/cucumber.json"},
+		features = {"src/test/java/eu/b24u/cucumber/features"}
+		)
+public class CucumberRunner {
+
+}
