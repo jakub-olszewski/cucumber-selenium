@@ -27,6 +27,9 @@ public class FacebookPageImpl extends BasePage implements FacebookPage{
 	@FindBy(id = "loginbutton")
 	private WebElement loginButton;
 
+	@FindBy(id = "u_0_l")
+	private WebElement nameField;
+
 	public FacebookPageImpl(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -58,5 +61,11 @@ public class FacebookPageImpl extends BasePage implements FacebookPage{
 	@Override
 	public String getTitle() {
 		return driver.getTitle();
+	}
+
+	@Override
+	public void setName(String name) {
+		nameField.clear();
+		nameField.sendKeys(name);
 	}
 }

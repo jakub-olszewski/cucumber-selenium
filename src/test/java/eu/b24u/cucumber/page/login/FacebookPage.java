@@ -31,4 +31,5 @@ public interface FacebookPage {
 	 */
 	public String getTitle();
 
+	public void setName(String name);
 }

@@ -3,6 +3,12 @@ Feature: Login page
   I want to test login page security
 
   @Scenario1
+  Scenario: Register account
+    Given the login page
+    When I write a name "Johny"
+
+
+  @Scenario2
   Scenario: Login with only filled username
     Given the login page
     When I write a username "administrator"

@@ -1,5 +1,6 @@
 package eu.b24u.cucumber.features.steps.facebook;
 
+import cucumber.api.PendingException;
 import org.junit.Assert;
 
 import cucumber.api.java.en.And;
@@ -11,19 +12,19 @@ import eu.b24u.cucumber.page.login.FacebookPageImpl;
 import eu.b24u.cucumber.steps.TestBase;
 
 public class LoginStepDefinition extends TestBase {
-	
+
+	@When("^I write a username \"([^\"]*)\"$")
+	public void i_write_a_username(String username) throws Throwable {
+		facebookPage.setUsername(username);
+	}
+
 	FacebookPage facebookPage;
-	
+
 	@Given("^the login page$")
 	public void the_login_page() throws Throwable {
 		prepare();
 		facebookPage = new FacebookPageImpl(getDriver()).navigateTo();
 		selenium.wait(1);
-	}
-
-	@When("^I write a username \"([^\"]*)\"$")
-	public void i_write_a_username(String username) throws Throwable {
-		facebookPage.setUsername(username);
 	}
 
 	@When("^I click a button login$")
@@ -42,5 +43,10 @@ public class LoginStepDefinition extends TestBase {
 		Assert.assertEquals(facebookPage.getTitle(), textInNotification);
 
 	    teardown();
+	}
+
+	@When("^I write a name \"([^\"]*)\"$")
+	public void iWriteAName(String name) throws Throwable {
+		facebookPage.setName(name);
 	}
 }
