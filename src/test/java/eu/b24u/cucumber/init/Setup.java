@@ -1,12 +1,9 @@
-package eu.b24u.cucumber.steps;
+package eu.b24u.cucumber.init;
 
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.Before;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import cucumber.api.Scenario;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
@@ -14,18 +11,14 @@ import eu.b24u.cucumber.utils.OSCheck;
 import eu.b24u.cucumber.utils.SeleniumUtil;
 
 
-public class TestBase {
+public class Setup {
 
-	public TestBase() {
+	public Setup() {
 	}
 
-	protected SeleniumUtil selenium;
+	public static SeleniumUtil selenium;
 	
-	private WebDriver driver;
-
-	protected WebDriver getDriver() {
-		return driver;
-	}
+	public static WebDriver driver;
 
 	protected void setDriver(WebDriver driver) {
 		this.driver = driver;
@@ -33,8 +26,8 @@ public class TestBase {
 
 	boolean silentMode;
 
-	@Before
-	public void prepare() {
+	@cucumber.api.java.Before
+	public void prepare()  {
 		silentMode = false;
 		// setup chromedriver
 		String osname = OSCheck.getName();
@@ -61,37 +54,47 @@ public class TestBase {
 		// not the implementation.
 
 		// maximize window
-		getDriver().manage().window().maximize();
+		driver.manage().window().maximize();
 
 		// And now use this to visit myBlog
 		// Alternatively the same thing can be done like this
 		// driver.navigate().to(testUrl);
-		selenium = new SeleniumUtil(getDriver());
+		selenium = new SeleniumUtil(driver);
 	}
 
 	public void openURL(String url) {
 		driver.get(url);
 	}
 
-	@After
-	public void teardown() throws IOException {
-		 driver.quit();
+	@cucumber.api.java.After
+	public void quitDriver(Scenario scenario){
+		if(scenario.isFailed()){
+			saveScreenshotsForScenario(scenario);
+		}
+		driver.quit();
+	}
+
+	private void saveScreenshotsForScenario(final Scenario scenario) {
+
+		final byte[] screenshot = ((TakesScreenshot) driver)
+				.getScreenshotAs(OutputType.BYTES);
+		scenario.embed(screenshot, "image/png");
 	}
 
 	protected void sendTextToElementById(String name, String text) {
-		getDriver().findElement(By.id(name)).sendKeys(text);
+		driver.findElement(By.id(name)).sendKeys(text);
 	}
 
 	protected void sendTextToElementByName(String name, String text) {
-		getDriver().findElement(By.name(name)).sendKeys(text);
+		driver.findElement(By.name(name)).sendKeys(text);
 	}
 
 	protected WebElement getElementByName(String name) {
-		return getDriver().findElement(By.name(name));
+		return driver.findElement(By.name(name));
 	}
 
 	protected WebElement getElementById(String name) {
-		return getDriver().findElement(By.id(name));
+		return driver.findElement(By.id(name));
 	}
 
 	protected void clickCheckBoxById(String name) {

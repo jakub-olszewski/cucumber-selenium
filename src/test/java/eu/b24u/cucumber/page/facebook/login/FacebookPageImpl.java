@@ -1,7 +1,6 @@
-package eu.b24u.cucumber.page.login;
+package eu.b24u.cucumber.page.facebook.login;
 
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -30,8 +29,7 @@ public class FacebookPageImpl extends BasePage implements FacebookPage{
 	@FindBy(id = "u_0_l")
 	private WebElement nameField;
 
-	public FacebookPageImpl(WebDriver driver) {
-		super(driver);
+	public FacebookPageImpl() {
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -49,13 +47,14 @@ public class FacebookPageImpl extends BasePage implements FacebookPage{
 	@Override
 	public void clickLoginButton() {
 		loginButton.click();
+		selenium.wait(1);
 	}
 
 	@Override
-	public FacebookPage navigateTo() {
+	public void navigateTo() {
 		getDriver().navigate().to(BASE_URL);
+		selenium.wait(1);
 		Assert.assertEquals("Facebook – zaloguj się lub zarejestruj", driver.getTitle());
-		return new FacebookPageImpl(getDriver());
 	}
 
 	@Override

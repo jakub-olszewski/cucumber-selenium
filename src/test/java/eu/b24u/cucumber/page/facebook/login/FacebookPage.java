@@ -1,4 +1,4 @@
-package eu.b24u.cucumber.page.login;
+package eu.b24u.cucumber.page.facebook.login;
 
 public interface FacebookPage {
 	
@@ -23,7 +23,7 @@ public interface FacebookPage {
 	 * Navigate to page
 	 * @return
 	 */
-	FacebookPage navigateTo();
+	public void navigateTo();
 
 	/**
 	 * get title page
