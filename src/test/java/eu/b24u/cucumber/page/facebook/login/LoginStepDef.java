@@ -9,7 +9,7 @@ import cucumber.api.java.en.When;
 import eu.b24u.cucumber.page.facebook.login.FacebookPage;
 import eu.b24u.cucumber.page.facebook.login.FacebookPageImpl;
 
-public class LoginStepDefinition  {
+public class LoginStepDef {
 
 	@When("^I write a username \"([^\"]*)\"$")
 	public void i_write_a_username(String username) throws Throwable {
@@ -18,7 +18,7 @@ public class LoginStepDefinition  {
 
 	FacebookPage facebookPage;
 
-	public LoginStepDefinition() {
+	public LoginStepDef() {
 		this.facebookPage = new FacebookPageImpl();
 	}
 
