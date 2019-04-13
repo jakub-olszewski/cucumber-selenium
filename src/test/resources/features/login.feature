@@ -14,4 +14,8 @@ Feature: Login page
     When I write a username "administrator"
     And I write a password "administrator"
     And I click a button login
+    And I navigate to charge tportmonetka
+    And I write a amount "50"
+    And I click a next button
+    And I click logout
     Then I see title page which contain "Zaloguj się do Facebooka | Facebook"

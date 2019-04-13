@@ -6,8 +6,8 @@ Feature: Login page on peka site
   Scenario: Login
     Given the login page on peka site
     When I write a username "administrator" on peka site
-#    And I write a password "administrator" on peka site
-#    And I click a button login on peka site
+    And I write a password "administrator" on peka site
+    And I click a button login on peka site
 #    Then I see title page which contain "????????????" on peka site
 
 #  Stworzenie feature dodanie linii scenariusza
